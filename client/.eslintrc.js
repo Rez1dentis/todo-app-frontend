@@ -18,6 +18,7 @@ module.exports = {
     'react',
   ],
   rules: {
+    'no-param-reassign': 0,
     'react/jsx-props-no-spreading': 0,
     'react/jsx-filename-extension': 0,
     'jsx-a11y/click-events-have-key-events': 0,

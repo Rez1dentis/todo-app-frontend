@@ -1,44 +1,51 @@
-import React, { useEffect, useState } from 'react';
+/* eslint-disable react/jsx-no-constructed-context-values */
+import React, { useEffect, useReducer, useState } from 'react';
 import TodoList from './components/TodoList/TodoList';
+import { Context } from './context/context';
+import reducer from './reducers/reducer';
 
 export default function App() {
-  const [todos, setTodos] = useState([]);
-
+  const [state, dispatch] = useReducer(reducer, JSON.parse(localStorage.getItem('todos')));
   const [todoTitle, setTodoTitle] = useState('');
 
+  const handleClick = () => console.log('click');
+
   useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(todos));
-  }, [todos]);
+    localStorage.setItem('todos', JSON.stringify(state));
+  }, [state]);
 
   const addTodo = (event) => {
     if (event.key === 'Enter') {
-      setTodos([
-        ...todos,
-        {
-          id: Date.now(),
-          title: todoTitle,
-          completed: false,
-        },
-      ]);
+      dispatch({
+        type: 'add',
+        payload: todoTitle,
+      });
+
       setTodoTitle('');
     }
   };
 
   return (
-    <div className="container">
-      <h1>Todo app</h1>
+    <Context.Provider value={{
+      dispatch,
+    }}
+    >
+      <div className="container">
+        <h1>Todo app</h1>
 
-      <div className="input-field">
-        <input
-          type="text"
-          value={todoTitle}
-          onChange={(event) => setTodoTitle(event.target.value)}
-          onKeyPress={addTodo}
-        />
-        <label>Введите текст</label>
+        <div className="input-field">
+          <input
+            type="text"
+            value={todoTitle}
+            onChange={(event) => setTodoTitle(event.target.value)}
+            onKeyPress={addTodo}
+          />
+          <label>Введите текст</label>
+        </div>
+
+        <TodoList todos={state} />
       </div>
 
-      <TodoList todos={todos} />
-    </div>
+    </Context.Provider>
   );
 }
