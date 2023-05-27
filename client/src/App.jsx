@@ -5,10 +5,9 @@ import { Context } from './context/context';
 import reducer from './reducers/reducer';
 
 export default function App() {
-  const [state, dispatch] = useReducer(reducer, JSON.parse(localStorage.getItem('todos')));
+  const initialState = JSON.parse(localStorage.getItem('todos')) || [];
+  const [state, dispatch] = useReducer(reducer, initialState);
   const [todoTitle, setTodoTitle] = useState('');
-
-  const handleClick = () => console.log('click');
 
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(state));
@@ -26,10 +25,7 @@ export default function App() {
   };
 
   return (
-    <Context.Provider value={{
-      dispatch,
-    }}
-    >
+    <Context.Provider value={{ dispatch }}>
       <div className="container">
         <h1>Todo app</h1>
 
@@ -42,10 +38,8 @@ export default function App() {
           />
           <label>Введите текст</label>
         </div>
-
         <TodoList todos={state} />
       </div>
-
     </Context.Provider>
   );
 }

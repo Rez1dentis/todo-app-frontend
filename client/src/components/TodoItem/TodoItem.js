@@ -16,19 +16,13 @@ export default function TodoItem({ title, id, completed }) {
         <input
           type="checkbox"
           checked={completed}
-          onChange={() => dispatch({
-            type: 'toggle',
-            payload: id,
-          })}
+          onChange={() => dispatch({ type: 'toggle', payload: id })}
         />
         <span>{title}</span>
 
         <i
           className="material-icons red-text"
-          onClick={() => dispatch({
-            type: 'remove',
-            payload: id,
-          })}
+          onClick={() => dispatch({ type: 'remove', payload: id })}
         >
           delete
         </i>
