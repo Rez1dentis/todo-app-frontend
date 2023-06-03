@@ -6,9 +6,10 @@ module.exports = {
   extends: ['plugin:react/recommended', 'standard-with-typescript'],
   overrides: [],
   parserOptions: {
+    project: './tsconfig.json',
+    tsconfigRootDir: __dirname,
     ecmaVersion: 'latest',
     sourceType: 'module',
-    project: './client/tsconfig.json',
   },
   plugins: ['react', '@typescript-eslint'],
   rules: {
@@ -20,5 +21,11 @@ module.exports = {
     'comma-dangle': 0,
     'react/react-in-jsx-scope': 'off',
     semi: 0,
+    'import/no-duplicates': 0,
+  },
+  settings: {
+    'import/resolver': {
+      typescript: {},
+    },
   },
 };

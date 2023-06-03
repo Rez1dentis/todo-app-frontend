@@ -2,6 +2,7 @@ import { Checkbox, Fab, IconButton, ListItemButton, ListItemText } from '@mui/ma
 import DeleteIcon from '@mui/icons-material/Delete';
 import ListItem from '@mui/material/ListItem';
 import EditIcon from '@mui/icons-material/Edit';
+import type { Task } from '../../types/Task';
 
 export const TodoItem = ({
   id,
