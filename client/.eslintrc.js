@@ -8,14 +8,17 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
-    project: './tsconfig.json',
+    project: './client/tsconfig.json',
   },
   plugins: ['react', '@typescript-eslint'],
   rules: {
+    '@typescript-eslint/comma-dangle': 0,
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/member-delimiter-style': 'off',
+    '@typescript-eslint/no-confusing-void-expression': 0,
+    '@typescript-eslint/semi': 'off',
     'comma-dangle': 0,
     'react/react-in-jsx-scope': 'off',
-    '@typescript-eslint/semi': 'off',
     semi: 0,
-    '@typescript-eslint/explicit-function-return-type': 'off',
   },
 };
